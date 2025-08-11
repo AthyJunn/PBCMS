@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomepageActivity" />
+        <activity android:name=".StaffHomeActivity" />
+        <activity android:name=".AdminHomeActivity" />
     </application>
 
 </manifest>
