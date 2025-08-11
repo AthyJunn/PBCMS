@@ -191,16 +191,15 @@
             <!-- Other Profile Info -->
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnSignIn"
+                android:id="@+id/btnSignOut"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/bg_button_signout"
                 android:text="Sign Out"
-
+                android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textAllCaps="false"
                 app:backgroundTint="@null" />
         </LinearLayout>
 
