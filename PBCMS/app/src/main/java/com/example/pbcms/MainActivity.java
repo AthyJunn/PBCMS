@@ -1,13 +1,13 @@
 package com.example.pbcms;
 
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,5 +19,23 @@ public class MainActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide(); // Hide the default action bar
         }
+
+        // Firebase initialization
+        if (FirebaseApp.getApps(this).isEmpty()) {
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setApplicationId("1:71197206218:android:5dac539c10bebbec823633")
+                    .setApiKey("AIzaSyAuJjF7dME30MFvqMLxfgXZeG19rGnMFak")
+                    .setProjectId("pbcms-c955a")
+                    .setStorageBucket("pbcms-c955a.firebasestorage.app") // Corrected
+                    .build();
+
+            FirebaseApp.initializeApp(this, options);
+        }
+
+        Button startButton = findViewById(R.id.getStartedButton);
+        startButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SigninActivity.class);
+            startActivity(intent);
+        });
     }
 }

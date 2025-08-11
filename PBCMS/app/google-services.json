@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "71197206218",
+    "project_id": "pbcms-c955a",
+    "storage_bucket": "pbcms-c955a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71197206218:android:5dac539c10bebbec823633",
+        "android_client_info": {
+          "package_name": "com.example.pbcms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuJjF7dME30MFvqMLxfgXZeG19rGnMFak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
