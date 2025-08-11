@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Top image -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="324dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/supermarket" />
+
+    <!-- Bottom panel -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@drawable/bg_bottom_panel">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Email -->
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/bg_input_inset"
+            android:hint="Enter your email"
+            android:paddingHorizontal="16dp"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#A0A0A0"
+            android:inputType="textEmailAddress" />
+
+        <!-- Password with toggle -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_input_inset">
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@id/ivTogglePassword"
+                android:hint="Password"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#A0A0A0"
+                android:inputType="textPassword"
+                android:background="@null" />
+
+            <ImageView
+                android:id="@+id/ivTogglePassword"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_baseline_remove_red_eye_24"
+                app:tint="#A0A0A0" />
+        </RelativeLayout>
+
+        <!-- Sign in button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_button_signin"
+            android:text="Sign in"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            app:backgroundTint="@null" />
+
+            <!-- Bottom link -->
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="end"
+                android:text="Forgot password ?"
+                android:textColor="#BDBDBD"
+                android:textSize="14sp" />
+
+    </LinearLayout>
+</FrameLayout>
+
+
+
+
