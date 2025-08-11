@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bottom panel -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="324dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/supermarket" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_back_arrow_foreground"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@drawable/bg_bottom_panel">
+
+    <TextView
+        android:id="@+id/ChangePass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/labelCurrentPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current Password"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/ChangePass"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/currentPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:inputType="textPassword"
+        android:hint="Enter current password"
+        android:textColorHint="#C4C4C4"
+        android:background="@drawable/bg_input_inset"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/labelCurrentPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/labelNewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Password"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/currentPasswordEditText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/newPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:inputType="textPassword"
+        android:hint="Enter new password"
+        android:textSize="15sp"
+        android:textColorHint="#C4C4C4"
+        android:background="@drawable/bg_input_inset"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/labelNewPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/labelConfirmPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/newPasswordEditText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:inputType="textPassword"
+        android:hint="Confirm new password"
+        android:textSize="15sp"
+        android:textColorHint="#C4C4C4"
+        android:background="@drawable/bg_input_inset"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/labelConfirmPassword"
+        app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+        android:id="@+id/updatePasswordBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:text="Update"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_bg_pwd"
+        android:backgroundTint="@null"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/confirmPasswordEditText"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+</FrameLayout>
