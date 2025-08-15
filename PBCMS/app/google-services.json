@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "71197206218",
     "project_id": "pbcms-c955a",
+    "firebase_url": "https://pbcms-c955a-default-rtdb.firebaseio.com",
     "storage_bucket": "pbcms-c955a.firebasestorage.app"
   },
   "client": [

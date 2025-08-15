@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setApplicationId("1:71197206218:android:5dac539c10bebbec823633")
                     .setApiKey("AIzaSyAuJjF7dME30MFvqMLxfgXZeG19rGnMFak")
+                    .setDatabaseUrl("https://pbcms-c955a-default-rtdb.firebaseio.com")
                     .setProjectId("pbcms-c955a")
                     .setStorageBucket("pbcms-c955a.firebasestorage.app") // Corrected
                     .build();
