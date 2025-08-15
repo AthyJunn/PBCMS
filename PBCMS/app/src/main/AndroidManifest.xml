@@ -29,6 +29,10 @@
         <activity android:name=".AdminProfileActivity" />
         <activity android:name=".StaffProfileActivity" />
         <activity android:name=".EditProfileActivity" />
+        <activity android:name=".StaffHomeActivity" />
+        <activity android:name=".AdminHomeActivity" />
+        <activity android:name=".ChangePwdActivity" />
+        <activity android:name=".ForgotPwdActivity" />
     </application>
 
 </manifest>

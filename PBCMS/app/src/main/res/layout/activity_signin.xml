@@ -30,50 +30,63 @@
             android:textStyle="bold" />
 
         <!-- Email -->
-        <EditText
-            android:id="@+id/etEmail"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bg_input_inset"
-            android:hint="Enter your email"
-            android:paddingHorizontal="16dp"
-            android:textSize="15sp"
-            android:textColor="#FFFFFF"
-            android:textColorHint="#A0A0A0"
-            android:inputType="textEmailAddress" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@null"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Enter your email"
+                android:background="@drawable/bg_input_inset"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="#A0A0A0"
+                android:inputType="textEmailAddress"
+                android:textSize="15sp"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <!-- Password with toggle -->
-        <RelativeLayout
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:background="@drawable/bg_input_inset">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@null"
+            app:hintEnabled="false"
+            app:endIconMode="password_toggle"
+            app:endIconTint="#A0A0A0">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toStartOf="@id/ivTogglePassword"
+                android:layout_height="50dp"
                 android:hint="Password"
+                android:background="@drawable/bg_input_inset"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:paddingStart="16dp"
-                android:paddingEnd="48dp"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
+                android:paddingEnd="16dp"
+                android:textColor="@color/white"
                 android:textColorHint="#A0A0A0"
                 android:inputType="textPassword"
-                android:background="@null" />
+                android:textSize="15sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/ivTogglePassword"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_baseline_remove_red_eye_24"
-                app:tint="#A0A0A0" />
-        </RelativeLayout>
 
         <!-- Sign in button -->
         <com.google.android.material.button.MaterialButton
@@ -88,16 +101,16 @@
             android:textAllCaps="false"
             app:backgroundTint="@null" />
 
-            <!-- Bottom link -->
-            <TextView
-                android:id="@+id/forgotPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="end"
-                android:text="Forgot password ?"
-                android:textColor="#BDBDBD"
-                android:textSize="14sp" />
+        <!-- Bottom link -->
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end"
+            android:text="Forgot password ?"
+            android:textColor="#BDBDBD"
+            android:textSize="14sp" />
 
     </LinearLayout>
 </FrameLayout>
