@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#101010">
+    android:background="#F3F8FF">
 
     <!--  Scrollable content  -->
     <ScrollView
@@ -26,10 +26,10 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/baseline_account_circle_24"
+                android:src="@drawable/ic_baseline_account_circle_24"
                 android:layout_marginTop="70dp"
                 android:layout_marginEnd="28dp"
-                app:tint="#FFFFFF"
+                app:tint="#3f3f3f"
                 android:layout_gravity="end"/>
 
             <!--  Greeting Section  -->
@@ -54,7 +54,7 @@
                         android:text="Hi"
                         android:textSize="26sp"
                         android:textStyle="bold"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3f3f3f"
                         android:fontFamily="sans-serif-medium"
                         android:layout_marginEnd="6dp"/>
 
@@ -65,7 +65,7 @@
                         android:text="Ahmar"
                         android:textSize="26sp"
                         android:textStyle="bold"
-                        android:textColor="#FFFFFF"
+                        android:textColor="#3f3f3f"
                         android:fontFamily="sans-serif-medium"/>
 
                 </LinearLayout>
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="Good Morning"
                     android:textSize="15sp"
-                    android:textColor="#B0B0B0"
+                    android:textColor="#3f3f3f"
                     android:fontFamily="sans-serif"/>
 
             </LinearLayout>
@@ -117,7 +117,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="28dp"
                                 android:contentDescription="Power Icon"
-                                android:src="@drawable/outline_cable_24"/>
+                                android:src="@drawable/ic_baseline_cable_24"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -148,12 +148,12 @@
 
                             <ImageView
                                 android:id="@+id/infoIcon"
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
                                 android:layout_marginStart="5dp"
-                                android:layout_marginTop="9dp"
+                                android:layout_marginTop="8dp"
                                 android:contentDescription="Info Icon"
-                                android:src="@drawable/baseline_info_24"/>
+                                android:src="@drawable/ic_baseline_info_24"/>
 
                         </LinearLayout>
                         <!--  Wifi row  -->
@@ -167,7 +167,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="28dp"
                                 android:contentDescription="WiFi Icon"
-                                android:src="@drawable/outline_android_wifi_3_bar_24"/>
+                                android:src="@drawable/ic_baseline_wifi_24"/>
 
                             <TextView
                                 android:id="@+id/wifiStatus"
@@ -188,7 +188,7 @@
                         android:layout_height="725px"
                         android:layout_marginStart="16dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/fridge_pbcms"/>
+                        android:src="@drawable/pr9451bi17401_113430004_rfd_77820_gbk_eu_sz1_webp"/>
 
                 </LinearLayout>
             </FrameLayout>
@@ -219,7 +219,7 @@
                         android:layout_height="54dp"
                         android:background="@drawable/baseline_circle_24"
                         android:padding="12dp"
-                        android:src="@drawable/outline_device_thermostat_24"
+                        android:src="@drawable/ic_baseline_thermostat_24"
                         app:tint="#000000"/>
 
                     <LinearLayout
@@ -275,7 +275,7 @@
                         android:layout_height="54dp"
                         android:background="@drawable/baseline_circle_24"
                         android:padding="14dp"
-                        android:src="@drawable/outline_humidity_mid_24"
+                        android:src="@drawable/ic_baseline_water_drop_24"
                         app:tint="#000000"/>
 
                     <LinearLayout
@@ -340,7 +340,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/baseline_home_24"
+            android:src="@drawable/ic_baseline_home_24"
             android:scaleType="centerInside"
             android:padding="14dp"/>
 
@@ -350,7 +350,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/outline_history_24"
+            android:src="@drawable/ic_baseline_history_24"
             android:scaleType="centerInside"
             app:tint="#FFFFFF"
             android:padding="14dp"/>
@@ -363,7 +363,7 @@
             android:background="@android:color/transparent"
             android:padding="14dp"
             android:scaleType="centerInside"
-            android:src="@drawable/baseline_search_24"
+            android:src="@drawable/ic_baseline_search_24"
             app:tint="#FFFFFF"/>
 
         <ImageButton
@@ -372,7 +372,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/outline_notifications_24"
+            android:src="@drawable/ic_baseline_notifications_none_24"
             android:scaleType="centerInside"
             app:tint="#FFFFFF"
             android:padding="14dp"/>

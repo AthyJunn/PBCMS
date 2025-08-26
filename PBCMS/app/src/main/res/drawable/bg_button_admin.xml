@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background shadow (bottom-right) -->
+    <item android:right="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#30617C" /> <!-- darker shade -->
+            <corners android:radius="25dp"/>
+        </shape>
+    </item>
+
+    <!-- Light highlight (top-left) -->
+    <item android:left="2dp" android:top="2dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#5896B8" /> <!-- lighter shade -->
+            <corners android:radius="25dp"/>
+        </shape>
+    </item>
+
+    <!-- Main color layer -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#42667A" /> <!-- main button color -->
+            <corners android:radius="25dp"/>
+        </shape>
+    </item>
+
+</layer-list>

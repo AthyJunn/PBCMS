@@ -3,9 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/black"
+    android:background="#F3F8FF"
     android:fillViewport="true">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,9 +27,9 @@
                 android:id="@+id/backButton"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/back_arrow"
+                android:src="@drawable/ic_baseline_arrow_back_24"
                 android:background="@android:color/transparent"
-                app:tint="@android:color/white"
+                app:tint="@android:color/black"
                 android:contentDescription="Back" />
 
             <TextView
@@ -40,8 +39,21 @@
                 android:text="Edit Staff Member"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_marginStart="10dp" />
+
+            <ImageButton
+                android:id="@+id/menu_button"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:clickable="true"
+                android:layout_marginStart="140dp"
+                android:layout_gravity="top|end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                android:contentDescription="Menu"
+                app:tint="@color/black"/>
+
         </LinearLayout>
 
         <!-- Profile Section -->
@@ -61,7 +73,6 @@
                 android:background="@drawable/rounded_background"
                 android:clipToOutline="true"
                 android:contentDescription="Profile Background" />
-            />
 
             <!-- Profile Circle (sits at bottom edge of background, overlaps out) -->
 
@@ -74,7 +85,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="-59dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/baseline_account_circle_24" />
+                app:tint="#D7DCE4"
+                android:src="@drawable/ic_baseline_account_circle_24" />
 
             <ImageView
                 android:id="@+id/cameraIconSmall"
@@ -106,9 +118,9 @@
                 android:textSize="14sp"
                 android:padding="12dp"
                 android:inputType="textPersonName"
-                android:background="@drawable/bg_input_black"
+                android:background="@drawable/bg_input"
                 android:textColor="@android:color/white"
-                android:textColorHint="#AAAAAA"
+                android:textColorHint="#8B9297"
                 android:layout_marginEnd="7dp"/>
 
             <EditText
@@ -120,9 +132,9 @@
                 android:textSize="14sp"
                 android:padding="12dp"
                 android:inputType="textPersonName"
-                android:background="@drawable/bg_input_black"
+                android:background="@drawable/bg_input"
                 android:textColor="@android:color/white"
-                android:textColorHint="#AAAAAA"
+                android:textColorHint="#8B9297"
                 android:layout_marginStart="7dp"/>
         </LinearLayout>
 
@@ -135,9 +147,9 @@
             android:textSize="14sp"
             android:padding="12dp"
             android:inputType="textEmailAddress"
-            android:background="@drawable/bg_input_black"
+            android:background="@drawable/bg_input"
             android:textColor="@android:color/white"
-            android:textColorHint="#AAAAAA"
+            android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
         <!-- Password -->
@@ -149,9 +161,9 @@
             android:textSize="14sp"
             android:padding="12dp"
             android:inputType="textPassword"
-            android:background="@drawable/bg_input_black"
+            android:background="@drawable/bg_input"
             android:textColor="@android:color/white"
-            android:textColorHint="#AAAAAA"
+            android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
         <!-- Phone No -->
@@ -163,9 +175,9 @@
             android:textSize="14sp"
             android:padding="12dp"
             android:inputType="phone"
-            android:background="@drawable/bg_input_black"
+            android:background="@drawable/bg_input"
             android:textColor="@android:color/white"
-            android:textColorHint="#AAAAAA"
+            android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
         <!-- Birthday -->
@@ -177,9 +189,9 @@
             android:textSize="14sp"
             android:padding="12dp"
             android:inputType="date"
-            android:background="@drawable/bg_input_black"
+            android:background="@drawable/bg_input"
             android:textColor="@android:color/white"
-            android:textColorHint="#AAAAAA"
+            android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -189,41 +201,24 @@
             android:text="Change Password"
             android:textAllCaps="false"
             android:textSize="16sp"
-            android:textColor="@android:color/white"
-            app:backgroundTint="@android:color/black"
-            app:strokeColor="@android:color/white"
-            app:strokeWidth="2dp"
-            android:layout_marginBottom="20dp"/>
-
-        <!-- Delete Staff Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/deleteStaffButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Delete Staff"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="@android:color/black"
-            app:strokeColor="@android:color/white"
-            app:strokeWidth="2dp"
-            app:cornerRadius="50dp"
-            android:layout_marginBottom="20dp"/>
-
+            android:textColor="#345470"
+            android:backgroundTint="@color/white"
+            android:layout_marginBottom="20dp"
+            app:cornerRadius="50dp" />
 
         <!-- Confirm Button -->
-        <Button
-            android:id="@+id/addButton"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirmButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_button_admin"
             android:text="Confirm"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#B85858"
-            android:padding="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
-
+            app:backgroundTint="@null" />
     </LinearLayout>
+
 </ScrollView>

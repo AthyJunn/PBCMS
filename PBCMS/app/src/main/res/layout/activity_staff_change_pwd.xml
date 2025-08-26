@@ -65,7 +65,6 @@
         app:layout_constraintTop_toBottomOf="@id/ChangePass"
         app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Password with toggle -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/currentPasswordLayout"
             android:layout_width="match_parent"
@@ -74,9 +73,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
-            app:hintEnabled="false"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#A0A0A0">
+            app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
@@ -90,6 +87,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="#A0A0A0"
+                app:errorTextColor="@color/red"
                 android:inputType="textPassword"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -105,7 +103,6 @@
         app:layout_constraintTop_toBottomOf="@id/currentPasswordLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Password with toggle -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/newPasswordLayout"
             android:layout_width="match_parent"
@@ -114,9 +111,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
-            app:hintEnabled="false"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#A0A0A0">
+            app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNewPassword"
@@ -130,6 +125,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="#A0A0A0"
+                app:errorTextColor="@color/red"
                 android:inputType="textPassword"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -145,7 +141,6 @@
         app:layout_constraintTop_toBottomOf="@id/newPasswordLayout"
         app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Password with toggle -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordLayout"
             android:layout_width="match_parent"
@@ -154,9 +149,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
-            app:hintEnabled="false"
-            app:endIconMode="password_toggle"
-            app:endIconTint="#A0A0A0">
+            app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirmPassword"
@@ -170,11 +163,10 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/white"
                 android:textColorHint="#A0A0A0"
+                app:errorTextColor="@color/red"
                 android:inputType="textPassword"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
-
-
 
         <com.google.android.material.button.MaterialButton
         android:id="@+id/updatePasswordBtn"
@@ -183,12 +175,13 @@
         android:layout_marginTop="16dp"
         android:text="Update"
         android:textColor="#FFFFFF"
-        android:background="@drawable/button_bg_pwd"
+        android:background="@drawable/bg_button_staff"
         android:backgroundTint="@null"
         android:textAllCaps="false"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+            android:onClick="onChangePassword"/>
 
     </LinearLayout>
     </ScrollView>

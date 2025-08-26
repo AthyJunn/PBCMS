@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme -->
+    <style name="Theme.PBCMS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <!-- Primary brand color (your button color) -->
+        <item name="colorPrimary">#42667A</item> <!-- nice medium blue -->
+        <item name="colorPrimaryVariant">#304454</item> <!-- darker shade for status bar -->
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color (optional highlight color) -->
+        <item name="colorSecondary">#42667A</item>
+        <item name="colorSecondaryVariant">#304454</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Remove default Material shapes if using custom drawables -->
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+    </style>
+</resources>
+
+
+
