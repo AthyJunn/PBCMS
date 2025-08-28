@@ -26,13 +26,31 @@
                 android:value="" />
         </activity>
         <activity android:name=".SigninActivity" />
-        <activity android:name=".AdminProfileActivity" />
+        <activity
+            android:name=".AdminProfileActivity"
+            android:theme="@style/Theme.AdminCommon" />
         <activity android:name=".StaffProfileActivity" />
-        <activity android:name=".EditProfileActivity" />
+        <activity
+            android:name=".AdminEditProfileActivity"
+            android:theme="@style/Theme.AdminCommon" />
         <activity android:name=".StaffHomeActivity" />
-        <activity android:name=".AdminHomeActivity" />
-        <activity android:name=".ChangePwdActivity" />
+        <activity
+            android:name=".AdminHomeActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity android:name=".StaffChangePwdActivity" />
         <activity android:name=".ForgotPwdActivity" />
+        <activity
+            android:name=".AdminChangePwdActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity
+            android:name=".AddStaffActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity
+            android:name=".EditStaffActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity
+            android:name=".ViewStaffActivity"
+            android:theme="@style/Theme.AdminCommon" />
     </application>
 
 </manifest>
