@@ -57,15 +57,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:paddingStart="30dp"/>
+            android:padding="16dp" />
     </ScrollView>
 
     <!-- Floating Add Button -->
     <ImageButton
         android:id="@+id/addStaffBtn"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:background="@drawable/ic_baseline_add_circle"
         app:tint="@android:color/white"
         android:scaleType="centerInside"
