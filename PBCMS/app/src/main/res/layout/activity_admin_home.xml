@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F8FF">
+    android:background="@color/white">
 
     <!--  Scrollable content  -->
     <ScrollView
@@ -27,7 +28,7 @@
                 android:layout_height="36dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_baseline_account_circle_24"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="28dp"
                 app:tint="#3f3f3f"
                 android:layout_gravity="end"/>
@@ -62,7 +63,7 @@
                         android:id="@+id/firstName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ahmar"
+                        android:text=""
                         android:textSize="26sp"
                         android:textStyle="bold"
                         android:textColor="#3f3f3f"
@@ -74,7 +75,7 @@
                     android:id="@+id/greetingMessage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Good Morning"
+                    android:text=""
                     android:textSize="15sp"
                     android:textColor="#3f3f3f"
                     android:fontFamily="sans-serif"/>
@@ -92,7 +93,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="298dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:padding="26dp">
@@ -142,7 +143,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Close"
+                                android:text=""
                                 android:textColor="@android:color/white"
                                 android:textSize="40sp"/>
 
@@ -175,7 +176,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="12dp"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="connected"
+                                android:text=""
                                 android:textColor="@android:color/white"
                                 android:textSize="16sp"/>
                         </LinearLayout>
@@ -234,7 +235,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-medium"
-                            android:text="25"
+                            android:text=""
                             android:textColor="@android:color/black"
                             android:textSize="21sp"/>
 
@@ -289,7 +290,7 @@
                             android:id="@+id/humidityValueCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="65"
+                            android:text=""
                             android:textColor="@android:color/white"
                             android:textSize="21sp"
                             android:fontFamily="sans-serif-medium"/>

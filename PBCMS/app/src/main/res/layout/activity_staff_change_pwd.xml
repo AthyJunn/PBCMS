@@ -155,7 +155,7 @@
                 android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:hint="Enter new password"
+                android:hint="Confirm new password"
                 android:background="@drawable/bg_input_inset"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"

@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Laiba Ahmar"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -89,7 +89,7 @@
                         android:id="@+id/employee_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="00107"
+                        android:text=""
                         android:textColor="#ffffff"
                         android:textSize="16sp"
                         android:textStyle="bold" />

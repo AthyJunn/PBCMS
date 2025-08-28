@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F8FF"
+    android:background="@color/white"
     android:fillViewport="true">
 
     <LinearLayout
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:text="Change Password"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textColor="#345470"
             android:backgroundTint="@color/white"
             android:layout_marginBottom="20dp"

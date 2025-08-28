@@ -26,6 +26,9 @@
                 android:value="" />
         </activity>
         <activity android:name=".SigninActivity" />
+        <activity android:name=".StaffHistoryActivity" />
+        <activity android:name=".StaffNotificationsActivity" />
+        <activity android:name=".StaffEditProfileActivity" />
         <activity
             android:name=".AdminProfileActivity"
             android:theme="@style/Theme.AdminCommon" />
@@ -50,6 +53,12 @@
             android:theme="@style/Theme.AdminCommon" />
         <activity
             android:name=".ViewStaffActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity
+            android:name=".AdminNotificationsActivity"
+            android:theme="@style/Theme.AdminCommon" />
+        <activity
+            android:name=".AdminHistoryActivity"
             android:theme="@style/Theme.AdminCommon" />
     </application>
 

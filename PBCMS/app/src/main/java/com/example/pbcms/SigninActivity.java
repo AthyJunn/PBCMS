@@ -5,18 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.pbcms.AdminHomeActivity;
-import com.example.pbcms.StaffHomeActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -126,13 +119,17 @@ public class SigninActivity extends AppCompatActivity {
         Intent intent;
         if (userType.equals("Admin")) {
             intent = new Intent(SigninActivity.this, AdminHomeActivity.class);
+            Toast.makeText(SigninActivity.this, "Signed in successfully as Admin", Toast.LENGTH_SHORT).show();
         } else if (userType.equals("Staff")) {
             intent = new Intent(SigninActivity.this, StaffHomeActivity.class);
+            Toast.makeText(SigninActivity.this, "Signed in successfully as Staff", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(SigninActivity.this, "Unknown user type", Toast.LENGTH_SHORT).show();
             return;
         }
+
         startActivity(intent);
         finish();
     }
+
 }

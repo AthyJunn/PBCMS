@@ -2,7 +2,6 @@ package com.example.pbcms;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -15,14 +14,14 @@ import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ChangePwdActivity extends AppCompatActivity {
+public class AdminChangePwdActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_pwd);
+        setContentView(R.layout.activity_admin_change_pwd);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide(); // Hide the default action bar
@@ -33,7 +32,7 @@ public class ChangePwdActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
     }
-    // This method will be called when the user clicks the "Change Password" button
+
     public void onChangePassword(View view) {
         TextInputEditText currentPasswordField = findViewById(R.id.etPassword);
         TextInputLayout currentPasswordLayout= findViewById(R.id.currentPasswordLayout);
@@ -46,30 +45,36 @@ public class ChangePwdActivity extends AppCompatActivity {
         String newPassword = newPasswordField.getText().toString().trim();
         String confirmNewPassword = confirmNewPasswordField.getText().toString().trim();
 
+        // Clear previous errors
+        currentPasswordLayout.setError(null);
+        newPasswordLayout.setError(null);
+        confirmPasswordLayout.setError(null);
+
         if (!newPassword.equals(confirmNewPassword)) {
             Toast.makeText(this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
             return;
         }
 
         boolean hasError = false;
+
         // Password validation
         if (currentPassword.isEmpty()) {
             currentPasswordLayout.setError("Password is required");
             hasError = true;
-        } else if(newPassword.isEmpty()){
+        }
+        if (newPassword.isEmpty()) {
             newPasswordLayout.setError("Please fill out this field");
             hasError = true;
-        } else if(confirmNewPassword.isEmpty()) {
+        }
+        if (confirmNewPassword.isEmpty()) {
             confirmPasswordLayout.setError("Please fill out this field");
             hasError = true;
-        } else if (newPassword.length() < 6) {
+        }
+        if (newPassword.length() < 6) {
             newPasswordLayout.setError("Password must be at least 6 characters");
             hasError = true;
-        } else {
-            newPasswordLayout.setError(null);
         }
 
-        // Stop if validation failed
         if (hasError) {
             return;
         }
@@ -81,15 +86,20 @@ public class ChangePwdActivity extends AppCompatActivity {
             user.reauthenticate(credential).addOnSuccessListener(aVoid -> {
                 user.updatePassword(newPassword)
                         .addOnSuccessListener(aVoid1 -> {
-                            Toast.makeText(this, "Password changed successfully!", Toast.LENGTH_SHORT).show();
-                            finish(); // Close the activity after successful password change
+                            Toast.makeText(AdminChangePwdActivity.this, "Password changed successfully!", Toast.LENGTH_SHORT).show();
+                            finish();
                         })
-                        .addOnFailureListener(e -> Toast.makeText(this, "Failed to change password: "
-                                + e.getMessage(), Toast.LENGTH_SHORT).show());
-            }).addOnFailureListener(e -> Toast.makeText(this, "Re-authentication failed: "
-                    + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(AdminChangePwdActivity.this, "Failed to change password: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(AdminChangePwdActivity.this, "Re-authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            });
         } else {
-            Toast.makeText(this, "User not logged in.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AdminChangePwdActivity.this, "User not logged in.", Toast.LENGTH_SHORT).show();
         }
+
     }
+
 }
+

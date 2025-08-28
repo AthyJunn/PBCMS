@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class AdminHomeActivity extends AppCompatActivity {
 
     private ImageButton profileButton, homeButton, historyButton, searchStaffButton, notificationsButton;
@@ -183,7 +182,7 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         searchStaffButton.setOnClickListener(v -> {
             updateButtonUI(searchStaffButton);
-            startActivity(new Intent(AdminHomeActivity.this, StaffViewActivity.class));
+            startActivity(new Intent(AdminHomeActivity.this, ViewStaffActivity.class));
         });
 
         notificationsButton.setOnClickListener(v -> {

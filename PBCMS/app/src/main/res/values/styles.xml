@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <!-- Base application theme -->
-    <style name="Theme.PBCMS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.AdminCommon" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color (your button color) -->
         <item name="colorPrimary">#42667A</item> <!-- nice medium blue -->
@@ -18,8 +19,11 @@
 
         <!-- Remove default Material shapes if using custom drawables -->
         <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button</item>
+
     </style>
+
 </resources>
+
 
 
 
