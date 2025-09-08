@@ -196,7 +196,7 @@
 
             <!--  Middle Cards (Linear Layout inside)  -->
             <LinearLayout
-                android:id="@+id/middleCards"
+                android:id="@+id/temperatureCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -206,9 +206,11 @@
 
                 <!--  Temperature  -->
                 <LinearLayout
+                    android:id="@+id/temperatureCardInner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"
                     android:orientation="vertical"
                     android:padding="16dp"
@@ -216,6 +218,7 @@
                     android:clipToOutline="true">
 
                     <ImageView
+                        android:id="@+id/temperatureIcon"
                         android:layout_width="54dp"
                         android:layout_height="54dp"
                         android:background="@drawable/baseline_circle_24"
@@ -262,9 +265,11 @@
 
                 <!--  Humidity  -->
                 <LinearLayout
+                    android:id="@+id/humidityCardInner"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:layout_marginStart="10dp"
                     android:orientation="vertical"
                     android:padding="16dp"
@@ -272,6 +277,7 @@
                     android:clipToOutline="true">
 
                     <ImageView
+                        android:id="@+id/humidityIcon"
                         android:layout_width="54dp"
                         android:layout_height="54dp"
                         android:background="@drawable/baseline_circle_24"

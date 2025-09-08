@@ -10,9 +10,14 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import java.util.Calendar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.graphics.Color;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -155,6 +160,43 @@ public class StaffHomeActivity extends AppCompatActivity {
                     doorStatus.setText(doorStatusVal != null ? doorStatusVal : "--");
                     wifiStatus.setText(wifiStatusVal != null ? wifiStatusVal : "--");
 
+                    Animation shake = AnimationUtils.loadAnimation(StaffHomeActivity.this, R.anim.shake);
+                    ImageView temperatureIcon = findViewById(R.id.temperatureIcon);
+                    LinearLayout temperatureCardInner = findViewById(R.id.temperatureCardInner);
+                    TextView tempValueCard  = findViewById(R.id.tempValueCard);
+
+                    if (isTemperatureCritical(tempVal)) {
+                        temperatureIcon.setColorFilter(Color.parseColor("#AC4242"));
+                        temperatureCardInner.startAnimation(shake);
+                        tempValueCard.startAnimation(shake);
+                    } else if(isTemperatureWarning(tempVal)){
+                        temperatureIcon.setColorFilter(Color.parseColor("#DD982B"));
+                        temperatureCardInner.startAnimation(shake);
+                        tempValueCard.startAnimation(shake);
+                    } else {
+                        temperatureIcon.setColorFilter(Color.BLACK); // reset to default color
+                        temperatureCardInner.clearAnimation();
+                        tempValueCard.clearAnimation();
+                    }
+
+                    ImageView humidityIcon = findViewById(R.id.humidityIcon);
+                    LinearLayout humidityCardInner = findViewById(R.id.humidityCardInner);
+                    TextView humidityValueCard  = findViewById(R.id.humidityValueCard);
+
+                    if (isHumidityCritical(humidityVal)) {
+                        humidityIcon.setColorFilter(Color.parseColor("#AC4242"));
+                        humidityCardInner.startAnimation(shake);
+                        humidityValueCard.startAnimation(shake);
+                    } else if(isHumidityWarning(humidityVal)) {
+                        humidityIcon.setColorFilter(Color.parseColor("#DD982B"));
+                        humidityCardInner.startAnimation(shake);
+                        humidityValueCard.startAnimation(shake);
+                    } else {
+                        humidityIcon.setColorFilter(Color.BLACK);
+                        humidityCardInner.clearAnimation();
+                        humidityValueCard.clearAnimation();
+                    }
+
                 }
             }
 
@@ -215,6 +257,22 @@ public class StaffHomeActivity extends AppCompatActivity {
     private void resetButton(ImageButton button) {
         button.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         button.setColorFilter(getResources().getColor(android.R.color.white));
+    }
+
+    private boolean isTemperatureWarning(int temperature) {
+        return temperature < 1 || temperature > 6;
+    }
+
+    private boolean isTemperatureCritical(int temperature) {
+        return temperature < 0 || temperature > 8;
+    }
+
+    private boolean isHumidityWarning(int humidity) {
+        return humidity < 30 || humidity > 70;
+    }
+
+    private boolean isHumidityCritical(int humidity) {
+        return humidity < 25 || humidity > 75;
     }
 }
 
