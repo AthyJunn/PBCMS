@@ -15,12 +15,9 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -82,6 +79,7 @@ public class EditStaffActivity extends AppCompatActivity {
 
     private void initializeUI() {
         backButton = findViewById(R.id.backButton);
+        menuButton = findViewById(R.id.menu_button);
         firstNameInput = findViewById(R.id.firstNameInput);
         lastNameInput = findViewById(R.id.lastNameInput);
         emailInput = findViewById(R.id.emailInput);
@@ -96,6 +94,8 @@ public class EditStaffActivity extends AppCompatActivity {
         emailInput.setTextColor(getResources().getColor(android.R.color.black));
         phoneInput.setTextColor(getResources().getColor(android.R.color.black));
         birthDateInput.setTextColor(getResources().getColor(android.R.color.black));
+
+        menuButton.setOnClickListener(this::showPopupMenu);
 
         // Set up profile picture functionality
         editProfileIcon.setOnClickListener(v -> showImagePickerDialog());
@@ -165,6 +165,21 @@ public class EditStaffActivity extends AppCompatActivity {
     private void setupListeners() {
         backButton.setOnClickListener(v -> finish());
         confirmButton.setOnClickListener(v -> updateStaff());
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenu().add(0, 1, 0, "Delete Staff");
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == 1) {
+                deleteStaff();
+                return true;
+            }
+            return false;
+        });
+
+        popupMenu.show();
     }
 
     private void updateStaff() {
@@ -300,4 +315,23 @@ public class EditStaffActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    private void deleteStaff() {
+        if (staffDocumentId == null) {
+            Toast.makeText(this, "Staff data not loaded properly", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        DocumentReference staffRef = db.collection("Staff").document(staffDocumentId);
+
+        staffRef.delete()
+                .addOnSuccessListener(aVoid -> {
+                    // Also delete the profile picture if exists
+                    deleteProfilePictureFromStorage();
+                    Toast.makeText(this, "Staff deleted successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error deleting staff: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
+    }
 }
