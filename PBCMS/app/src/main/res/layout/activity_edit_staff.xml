@@ -56,15 +56,14 @@
 
         </LinearLayout>
 
-        <!-- Profile Section -->
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginBottom="80dp"
+            android:layout_height="180dp"
+            android:layout_marginBottom="50dp"
             android:clipChildren="false"
             android:clipToPadding="false">
 
-            <!-- Rounded background -->
+            <!-- Background -->
             <ImageView
                 android:id="@+id/profileBg"
                 android:layout_width="match_parent"
@@ -74,35 +73,44 @@
                 android:clipToOutline="true"
                 android:contentDescription="Profile Background" />
 
-            <!-- Profile Circle (sits at bottom edge of background, overlaps out) -->
+            <!-- Inner layout for precise control -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="-30dp">
 
-            <!-- Small camera icon -->
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_alignBottom="@id/profileBg"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-59dp"
-                android:scaleType="centerCrop"
-                app:tint="#D7DCE4"
-                android:src="@drawable/ic_baseline_account_circle_24" />
+                <!-- Profile Image -->
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="-30dp"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:contentDescription="Profile Image" />
 
-            <ImageView
-                android:id="@+id/cameraIconSmall"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@android:drawable/ic_menu_camera"
-                android:background="@drawable/bg_circle_gray"
-                android:padding="3dp"
-                android:layout_alignBottom="@id/profileImage"
-                android:layout_alignEnd="@id/profileImage"
-                android:layout_margin="2dp" />
+                <!-- Edit Icon beside profile image -->
+                <ImageButton
+                    android:id="@+id/editProfileIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@id/profileImage"
+                    android:layout_toEndOf="@id/profileImage"
+                    android:layout_marginStart="-32dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_circle_gray"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="3dp"
+                    android:scaleType="centerInside"
+                    android:src="@android:drawable/ic_menu_camera"
+                    app:backgroundTint="@null"
+                    android:contentDescription="Edit Profile Icon"/>
+            </RelativeLayout>
+        </FrameLayout>
 
-            <!-- Edit button with rounded background -->
-
-        </RelativeLayout>
-        <!-- First & Last Name Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,20 +160,6 @@
             android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
-        <!-- Password -->
-        <EditText
-            android:id="@+id/passwordInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textSize="14sp"
-            android:padding="12dp"
-            android:inputType="textPassword"
-            android:background="@drawable/bg_input"
-            android:textColor="@android:color/white"
-            android:textColorHint="#8B9297"
-            android:layout_marginBottom="15dp" />
-
         <!-- Phone No -->
         <EditText
             android:id="@+id/phoneInput"
@@ -185,7 +179,7 @@
             android:id="@+id/birthDateInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Birthday"
+            android:hint="Birthdate"
             android:textSize="14sp"
             android:padding="12dp"
             android:inputType="date"
@@ -193,18 +187,6 @@
             android:textColor="@android:color/white"
             android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/changePasswordButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Password"
-            android:textAllCaps="false"
-            android:textSize="14sp"
-            android:textColor="#345470"
-            android:backgroundTint="@color/white"
-            android:layout_marginBottom="20dp"
-            app:cornerRadius="50dp" />
 
         <!-- Confirm Button -->
         <com.google.android.material.button.MaterialButton
