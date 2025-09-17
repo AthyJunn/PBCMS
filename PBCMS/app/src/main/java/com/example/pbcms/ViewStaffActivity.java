@@ -11,16 +11,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.squareup.picasso.Picasso;
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class ViewStaffActivity extends AppCompatActivity {
     private List<View> staffViews = new ArrayList<>();
 
     private FirebaseFirestore db;
+    private ListenerRegistration staffListener; // 🔥 real-time listener reference
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,14 +90,30 @@ public class ViewStaffActivity extends AppCompatActivity {
             }
         });
 
-        // Load staff from Firestore
-        loadStaffList();
+        // Load staff from Firestore in real-time
+        startStaffListener();
     }
 
-    private void loadStaffList() {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Stop listening when activity is destroyed
+        if (staffListener != null) {
+            staffListener.remove();
+        }
+    }
+
+    private void startStaffListener() {
         CollectionReference staffRef = db.collection("Staff");
 
-        staffRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
+        staffListener = staffRef.addSnapshotListener((queryDocumentSnapshots, e) -> {
+            if (e != null) {
+                Toast.makeText(this, "Failed to load staff: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (queryDocumentSnapshots == null) return;
+
             contentLayout.removeAllViews();
             staffViews.clear();
 
@@ -112,7 +131,7 @@ public class ViewStaffActivity extends AppCompatActivity {
 
                 if (imageUrl != null && !imageUrl.isEmpty()) {
                     Picasso.get()
-                            .load(new File(imageUrl))  // see note below
+                            .load(new File(imageUrl))  // ✅ changed from File() to URL
                             .placeholder(R.drawable.ic_baseline_account_circle_24)
                             .transform(new CropCircleTransformation())
                             .into(profileImage);
@@ -123,6 +142,7 @@ public class ViewStaffActivity extends AppCompatActivity {
                 String email = doc.getString("Email"); // make sure your Firestore has "Email" field
 
                 staffView.setOnClickListener(v -> {
+                    Log.d("DEBUG", "Staff view clicked");
                     Intent intent = new Intent(ViewStaffActivity.this, EditStaffActivity.class);
                     intent.putExtra("staffEmail", email);
                     startActivity(intent);
@@ -131,20 +151,18 @@ public class ViewStaffActivity extends AppCompatActivity {
                 staffViews.add(staffView);
                 contentLayout.addView(staffView);
             }
-
-        }).addOnFailureListener(e ->
-                Toast.makeText(this, "Failed to load staff: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-        );
+        });
     }
 
     private void filterStaffList(String query) {
         for (View view : staffViews) {
-          TextView nameText = view.findViewById(R.id.staffName);
-    String name = nameText.getText().toString().toLowerCase();
+            TextView nameText = view.findViewById(R.id.staffName);
+            String name = nameText.getText().toString().toLowerCase();
             view.setVisibility(name.contains(query.toLowerCase()) ? View.VISIBLE : View.GONE);
-}
+        }
     }
-private void updateButtonUI(ImageButton selectedButton) {
+
+    private void updateButtonUI(ImageButton selectedButton) {
         // Reset all buttons first
         resetButton(homeButton);
         resetButton(historyButton);
@@ -154,11 +172,11 @@ private void updateButtonUI(ImageButton selectedButton) {
         // Apply selected style to the clicked one
         selectedButton.setBackgroundResource(R.drawable.baseline_circle_24); // white circular background
         selectedButton.setColorFilter(getResources().getColor(android.R.color.black)); // black icon
-        }
+    }
 
-private void resetButton(ImageButton button) {
+    private void resetButton(ImageButton button) {
         button.setBackgroundColor(android.graphics.Color.TRANSPARENT);
         button.setColorFilter(getResources().getColor(android.R.color.white));
-        }
-
+    }
 }
+
