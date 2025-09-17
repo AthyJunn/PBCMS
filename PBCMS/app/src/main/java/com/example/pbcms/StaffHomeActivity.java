@@ -144,50 +144,59 @@ public class StaffHomeActivity extends AppCompatActivity {
         doorStatus = findViewById(R.id.doorStatus);
         wifiStatus = findViewById(R.id.wifiStatus);
 
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference sensorsRef = FirebaseDatabase.getInstance().getReference("sensors");
+        DatabaseReference wifiRef = FirebaseDatabase.getInstance().getReference("wifiStatus");
 
-        rootRef.addValueEventListener(new ValueEventListener() {
+        // Listen for sensors
+        sensorsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Integer tempVal = snapshot.child("temperature").getValue(Integer.class);
-                    Integer humidityVal = snapshot.child("humidity").getValue(Integer.class);
-                    String doorStatusVal = snapshot.child("doorStatus").getValue(String.class);
-                    String wifiStatusVal = snapshot.child("wifiStatus").getValue(String.class);
+                    Long tempValLong = snapshot.child("temperature").getValue(Long.class);
+                    Double humidityValDouble = snapshot.child("humidity").getValue(Double.class);
+                    String doorStatusVal = snapshot.child("door_status").getValue(String.class);
 
-                    temperature.setText(tempVal != null ? String.valueOf(tempVal) : "--");
-                    humidity.setText(humidityVal != null ? String.valueOf(humidityVal) : "--");
+                    // Default values if null
+                    int tempVal = (tempValLong != null) ? tempValLong.intValue() : 0;
+                    int humidityVal = (humidityValDouble != null) ? humidityValDouble.intValue() : 0;
+
+                    // Update UI
+                    temperature.setText(tempValLong != null ? String.valueOf(tempVal) : "--");
+                    humidity.setText(humidityValDouble != null ? String.valueOf(humidityValDouble) : "--");
                     doorStatus.setText(doorStatusVal != null ? doorStatusVal : "--");
-                    wifiStatus.setText(wifiStatusVal != null ? wifiStatusVal : "--");
 
+                    // --- Animation logic ---
                     Animation shake = AnimationUtils.loadAnimation(StaffHomeActivity.this, R.anim.shake);
+
+                    // Temperature
                     ImageView temperatureIcon = findViewById(R.id.temperatureIcon);
                     LinearLayout temperatureCardInner = findViewById(R.id.temperatureCardInner);
-                    TextView tempValueCard  = findViewById(R.id.tempValueCard);
+                    TextView tempValueCard = findViewById(R.id.tempValueCard);
 
                     if (isTemperatureCritical(tempVal)) {
                         temperatureIcon.setColorFilter(Color.parseColor("#AC4242"));
                         temperatureCardInner.startAnimation(shake);
                         tempValueCard.startAnimation(shake);
-                    } else if(isTemperatureWarning(tempVal)){
+                    } else if (isTemperatureWarning(tempVal)) {
                         temperatureIcon.setColorFilter(Color.parseColor("#DD982B"));
                         temperatureCardInner.startAnimation(shake);
                         tempValueCard.startAnimation(shake);
                     } else {
-                        temperatureIcon.setColorFilter(Color.BLACK); // reset to default color
+                        temperatureIcon.setColorFilter(Color.BLACK);
                         temperatureCardInner.clearAnimation();
                         tempValueCard.clearAnimation();
                     }
 
+                    // Humidity
                     ImageView humidityIcon = findViewById(R.id.humidityIcon);
                     LinearLayout humidityCardInner = findViewById(R.id.humidityCardInner);
-                    TextView humidityValueCard  = findViewById(R.id.humidityValueCard);
+                    TextView humidityValueCard = findViewById(R.id.humidityValueCard);
 
                     if (isHumidityCritical(humidityVal)) {
                         humidityIcon.setColorFilter(Color.parseColor("#AC4242"));
                         humidityCardInner.startAnimation(shake);
                         humidityValueCard.startAnimation(shake);
-                    } else if(isHumidityWarning(humidityVal)) {
+                    } else if (isHumidityWarning(humidityVal)) {
                         humidityIcon.setColorFilter(Color.parseColor("#DD982B"));
                         humidityCardInner.startAnimation(shake);
                         humidityValueCard.startAnimation(shake);
@@ -196,15 +205,29 @@ public class StaffHomeActivity extends AppCompatActivity {
                         humidityCardInner.clearAnimation();
                         humidityValueCard.clearAnimation();
                     }
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Failed to read data", error.toException());
+                Log.e("FirebaseError", "Failed to read sensors", error.toException());
             }
         });
+
+        // Listen for wifi status separately
+        wifiRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String wifiStatusVal = snapshot.getValue(String.class);
+                wifiStatus.setText(wifiStatusVal != null ? wifiStatusVal : "--");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Failed to read wifiStatus", error.toException());
+            }
+        });
+
 
         homeButton = findViewById(R.id.homeButton);
         historyButton = findViewById(R.id.historyButton);
