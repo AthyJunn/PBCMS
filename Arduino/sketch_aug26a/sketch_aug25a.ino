@@ -5,6 +5,7 @@
 #include "DHT.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <time.h>
 
 const char* WIFI_SSID_1 = "UTMNet";
 const char* WIFI_PASSWORD_1 = "Hopy0506290558@";
@@ -84,6 +85,11 @@ OneWire oneWire(DS18B20_PIN);
 DallasTemperature sensors(&oneWire);
 DHT dht(DHT_PIN, DHT_TYPE);
 
+// NTP for timestamp
+const char* ntpServer = "pool.ntp.org";
+const long gmtOffset_sec = 8 * 3600;  // GMT+8 (Malaysia)
+const int daylightOffset_sec = 0;
+
 void connectWiFi() {
   Serial.println("Connecting to Wi-Fi...");
   WiFi.disconnect(true);
@@ -118,6 +124,27 @@ void connectWiFi() {
   }
 }
 
+void initTime() {
+  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+}
+
+void waitForTime() {
+  struct tm timeinfo;
+  while (!getLocalTime(&timeinfo)) {
+    Serial.println("Waiting for NTP time...");
+    delay(1000);
+  }
+  Serial.println("✅ NTP time obtained");
+}
+
+String getTimestampKey() {
+  struct tm timeinfo;
+  if (!getLocalTime(&timeinfo)) return "unknown";
+  char buffer[20];
+  strftime(buffer, sizeof(buffer), "%Y-%m-%d_%H-%M", &timeinfo);
+  return String(buffer);
+}
+
 void setup() {
   Serial.begin(115200);
   connectWiFi();
@@ -149,6 +176,10 @@ void setup() {
   sensors.begin();
   dht.begin();
   pinMode(REED_PIN, INPUT_PULLUP);
+
+  // Time
+  initTime();
+  waitForTime();
 }
 
 void updateDisplay(float tempInside, float humidity, bool doorClosed) {
@@ -196,35 +227,38 @@ void loop() {
   float tempDS18B20 = sensors.getTempCByIndex(0);
   float tempDHT22 = dht.readTemperature();
   float humidity = dht.readHumidity();
+
+  if (isnan(tempDS18B20)) tempDS18B20 = 0.0;
+  if (isnan(tempDHT22)) tempDHT22 = 0.0;
+  if (isnan(humidity)) humidity = 0.0;
+
   String doorStatus = (digitalRead(REED_PIN) == LOW) ? "CLOSED" : "OPEN";
   bool doorClosed = (doorStatus == "CLOSED");
   String wifiStatus = (WiFi.status() == WL_CONNECTED) ? "connected" : "disconnected";
 
-  Serial.printf("🌡 Inside Temp: %.2f °C | Outside Temp: %.2f °C | Humidity: %.2f %% | Door: %s\n",
-                tempDS18B20, tempDHT22, humidity, doorStatus.c_str());
+  String timestampKey = getTimestampKey();
+
+  Serial.printf("🌡 Inside Temp: %.2f °C | Humidity: %.2f %% | Door: %s | Key: %s\n",
+                tempDS18B20, humidity, doorStatus.c_str(), timestampKey.c_str());
 
   if (Firebase.ready()) {
-    if (!Firebase.setFloat(fbdo, "/sensors/temperature", tempDS18B20)) {
-      Serial.println("❌ Failed to send temperature:");
-      Serial.println(fbdo.errorReason());
-    }
+    // Update current values
+    Firebase.setFloat(fbdo, "/sensors/temperature", tempDS18B20);
+    Firebase.setFloat(fbdo, "/sensors/humidity", humidity);
+    Firebase.setString(fbdo, "/sensors/door_status", doorStatus);
+    Firebase.setString(fbdo, "/wifiStatus", wifiStatus);
 
-    if (!Firebase.setFloat(fbdo, "/sensors/humidity", humidity)) {
-      Serial.println("❌ Failed to send humidity:");
-      Serial.println(fbdo.errorReason());
-    }
-
-    if (!Firebase.setString(fbdo, "/sensors/door_status", doorStatus)) {
-      Serial.println("❌ Failed to send door status:");
-      Serial.println(fbdo.errorReason());
-    }
-
-    if (!Firebase.setString(fbdo, "/wifiStatus", wifiStatus)) {
-      Serial.println("❌ Failed to send WiFi status:");
-      Serial.println(fbdo.errorReason());
+    // Update history
+    if(timestampKey != "unknown") {
+      FirebaseJson json;
+      json.set("temperature", tempDS18B20);
+      json.set("humidity", humidity);
+      json.set("door_status", doorStatus);
+      Firebase.setJSON(fbdo, "/sensors/history/" + timestampKey, json);
     }
   }
 
   updateDisplay(tempDS18B20, humidity, doorClosed);
-  delay(2000);
+
+  delay(5000);  // 5 seconds
 }
