@@ -2,15 +2,15 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        jcenter()  // Add this if necessary
     }
     dependencies {
-        // Update the Google services classpath to the latest version
-        classpath 'com.google.gms:google-services:4.4.2' // Latest stable version
+        classpath 'com.google.gms:google-services:4.4.2'
     }
 }
+
 plugins {
     id 'com.android.application' version '7.3.1' apply false
     id 'com.android.library' version '7.3.1' apply false
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
 }
+

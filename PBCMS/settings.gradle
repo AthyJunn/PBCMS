@@ -1,16 +1,20 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
+        maven { url 'https://jitpack.io' } // ✅ add here
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' } // ✅ add here
     }
 }
+
 rootProject.name = "PBCMS"
-include ':app'
+include(":app")

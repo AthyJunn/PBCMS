@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.pbcms"
-        minSdk 21
+        minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -28,7 +28,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -48,10 +47,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation 'com.google.firebase:firebase-storage'
 
+    // MPAndroidChart (for LineChart & BarChart)
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
     // CircleImageView (de.hdodenhof)
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Picasso (for image loading)
     implementation 'com.squareup.picasso:picasso:2.71828'
-
 }
