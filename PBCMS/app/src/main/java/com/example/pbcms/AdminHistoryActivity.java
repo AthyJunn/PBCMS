@@ -34,7 +34,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,9 +105,12 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
         backButton.setOnClickListener(v -> finish());
 
         // Load initial data
-        loadSensorData();
+        reloadData();
         doorHistoryContainer = findViewById(R.id.doorHistoryContainer);
+    }
 
+    private void reloadData() {
+        loadSensorData();
         loadDoorHistory();
     }
 
@@ -182,7 +185,7 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
         yearBtn.setTextColor(range.equals("year") ? Color.WHITE : inactiveColor);
 
         updateDateText();
-        loadSensorData();
+        reloadData();
     }
 
     private void navigateDate(int direction) {
@@ -201,7 +204,81 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
                 break;
         }
         updateDateText();
-        loadSensorData();
+        reloadData();
+    }
+
+    private void configureXAxis(XAxis xAxis) {
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f);
+        xAxis.setValueFormatter(getXAxisFormatter());
+
+        switch (currentRange) {
+            case "day":
+                // 24 hours, but chart only ~250dp tall, so we show 6 labels (every 4 hours)
+                xAxis.setLabelCount(6, false);
+                break;
+            case "week":
+                xAxis.setLabelCount(7, false);
+                break;
+            case "month":
+                // Show 4 weeks max (W1, W2, W3, W4)
+                xAxis.setLabelCount(4, false);
+                break;
+            case "year":
+                // 12 months, all visible
+                xAxis.setLabelCount(12, false);
+                break;
+        }
+    }
+
+    private ValueFormatter getXAxisFormatter() {
+        switch (currentRange) {
+            case "day":
+                return new ValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value) {
+                        return String.format(Locale.getDefault(), "%02d:00", (int) value);
+                    }
+                };
+            case "week":
+                return new ValueFormatter() {
+                    private final String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+                    @Override
+                    public String getFormattedValue(float value) {
+                        int index = (int) value % 7;
+                        return days[index];
+                    }
+                };
+            case "month":
+                return new ValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value) {
+                        return "W" + ((int) value + 1); // W1, W2, etc.
+                    }
+                };
+            case "year":
+                return new ValueFormatter() {
+                    private final String[] months = {
+                            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                    };
+
+                    @Override
+                    public String getFormattedValue(float value) {
+                        int index = (int) value % 12;
+                        return months[index];
+                    }
+                };
+            default:
+                return new ValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value) {
+                        return String.valueOf((int) value);
+                    }
+                };
+        }
     }
 
     private void updateDateText() {
@@ -328,6 +405,7 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
         tempDataSet.setHighlightEnabled(true);
 
         temperatureChart.setData(new LineData(tempDataSet));
+        configureXAxis(temperatureChart.getXAxis());
         temperatureChart.invalidate();
 
         // Humidity dataset
@@ -338,6 +416,7 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
 
         BarData humidityData = new BarData(humidityDataSet);
         humidityChart.setData(humidityData);
+        configureXAxis(humidityChart.getXAxis());
         humidityChart.invalidate();
 
         // Update latest values
@@ -369,8 +448,8 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
                 label = "Week " + ((int) e.getX() + 1);
                 break;
             case "year":
-                String[] months = {"Jan","Feb","Mar","Apr","May","Jun",
-                        "Jul","Aug","Sep","Oct","Nov","Dec"};
+                String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
                 label = months[(int) e.getX()];
                 break;
         }
@@ -385,7 +464,8 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
     }
 
     @Override
-    public void onNothingSelected() {}
+    public void onNothingSelected() {
+    }
 
     private void loadDoorHistory() {
         DatabaseReference doorRef = FirebaseDatabase.getInstance().getReference("sensors/history");
@@ -394,13 +474,46 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 doorHistoryContainer.removeAllViews(); // Clear previous items
+                List<String[]> doorEvents = new ArrayList<>();
 
                 for (DataSnapshot data : snapshot.getChildren()) {
                     String timestamp = data.getKey(); // "YYYY-MM-DD HH:mm"
                     String doorStatus = data.child("door_status").getValue(String.class);
-                    if (doorStatus != null) {
-                        addDoorHistoryItem(timestamp, doorStatus);
+                    if (doorStatus != null && timestamp != null) {
+                        try {
+                            Date date = firebaseDateFormat.parse(timestamp);
+                            if (date == null) continue;
+
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(date);
+
+                            // Filter by current selected range
+                            if (!isInCurrentRange(cal)) continue;
+
+                            doorEvents.add(new String[]{timestamp, doorStatus});
+
+                        } catch (ParseException e) {
+                            Log.e("DoorHistory", "Date parse error: " + timestamp, e);
+                        }
                     }
+                }
+                // Sort latest first (descending)
+                doorEvents.sort((a, b) -> b[0].compareTo(a[0]));
+
+                // If no events, show "No record.."
+                if (doorEvents.isEmpty()) {
+                    TextView noRecordText = new TextView(AdminHistoryActivity.this);
+                    noRecordText.setText("No record in this time.");
+                    noRecordText.setTextColor(Color.parseColor("#757575"));
+                    noRecordText.setTextSize(14);
+                    noRecordText.setGravity(Gravity.CENTER);
+                    doorHistoryContainer.addView(noRecordText);
+                    return;
+                }
+
+                // Add sorted events to UI
+                for (String[] event : doorEvents) {
+                    addDoorHistoryItem(event[0], event[1]);
                 }
             }
 
@@ -410,7 +523,6 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
             }
         });
     }
-
     private void addDoorHistoryItem(String timestamp, String doorStatus) {
         // Parent horizontal layout
         LinearLayout itemLayout = new LinearLayout(this);
@@ -425,7 +537,6 @@ public class AdminHistoryActivity extends AppCompatActivity implements OnChartVa
         itemLayout.setBackgroundResource(R.drawable.bg_door_card_light);
         itemLayout.setGravity(Gravity.CENTER_VERTICAL);
 
-        // Icon
         // Icon
         ImageView icon = new ImageView(this);
         int sizeInDp = 24;
