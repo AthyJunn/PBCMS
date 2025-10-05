@@ -1,0 +1,25 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Door frame -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF7043"
+        android:strokeWidth="2"
+        android:pathData="M4,3h16v18h-16z" />
+
+    <!-- Open door (angled inward) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FF7043"
+        android:strokeWidth="2"
+        android:pathData="M10,3l5,3v12l-5,3z" />
+
+    <!-- Door handle -->
+    <path
+        android:fillColor="#FF7043"
+        android:pathData="M14.5,12a0.8,0.8 0 1,0 0,-1.6a0.8,0.8 0 1,0 0,1.6z" />
+</vector>
