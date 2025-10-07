@@ -36,23 +36,11 @@
                 android:id="@+id/titleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Edit Staff Member"
+                android:text="Edit Staff"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:layout_marginStart="10dp" />
-
-            <ImageButton
-                android:id="@+id/menu_button"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:clickable="true"
-                android:layout_marginStart="140dp"
-                android:layout_gravity="top|end"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_baseline_more_vert_24"
-                android:contentDescription="Menu"
-                app:tint="@color/black"/>
 
         </LinearLayout>
 
@@ -188,15 +176,28 @@
             android:textColorHint="#8B9297"
             android:layout_marginBottom="15dp" />
 
-        <!-- Confirm Button -->
+        <!-- Save Changes Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/confirmButton"
+            android:id="@+id/saveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="38dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/bg_button_admin"
-            android:text="Confirm"
+            android:text="Save Changes"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:backgroundTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/bg_button_staff"
+            android:text="Delete Staff"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"

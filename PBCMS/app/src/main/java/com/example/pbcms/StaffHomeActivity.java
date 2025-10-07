@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import java.util.Calendar;
+import java.util.Locale;
+
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -152,17 +154,24 @@ public class StaffHomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Long tempValLong = snapshot.child("temperature").getValue(Long.class);
-                    Double humidityValDouble = snapshot.child("humidity").getValue(Double.class);
                     String doorStatusVal = snapshot.child("door_status").getValue(String.class);
+                    Double tempValDouble = snapshot.child("temperature").getValue(Double.class);
+                    Double humidityValDouble = snapshot.child("humidity").getValue(Double.class);
 
-                    // Default values if null
-                    int tempVal = (tempValLong != null) ? tempValLong.intValue() : 0;
+                    int tempVal = (tempValDouble != null) ? tempValDouble.intValue() : 0;
                     int humidityVal = (humidityValDouble != null) ? humidityValDouble.intValue() : 0;
 
-                    // Update UI
-                    temperature.setText(tempValLong != null ? String.valueOf(tempVal) : "--");
-                    humidity.setText(humidityValDouble != null ? String.valueOf(humidityValDouble) : "--");
+                    if (tempValDouble != null) {
+                        temperature.setText(String.format(Locale.getDefault(), "%.1f", tempValDouble));
+                    } else {
+                        temperature.setText("--");
+                    }
+
+                    if (humidityValDouble != null) {
+                        humidity.setText(String.format(Locale.getDefault(), "%.1f", humidityValDouble));
+                    } else {
+                        humidity.setText("--");
+                    }
                     doorStatus.setText(doorStatusVal != null ? doorStatusVal : "--");
 
                     // --- Animation logic ---

@@ -38,11 +38,9 @@ public class EditStaffActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private EditText firstNameInput, lastNameInput, emailInput, phoneInput, birthDateInput;
-    private MaterialButton confirmButton;
-    private ImageButton backButton, menuButton;
+    private MaterialButton saveButton, deleteButton;
+    private ImageButton backButton, editProfileIcon;
     private ImageView profileImage;
-    private ImageButton editProfileIcon;
-
     private String staffEmail;
     private String staffDocumentId;
     private String staffUid;
@@ -74,18 +72,20 @@ public class EditStaffActivity extends AppCompatActivity {
 
         initializeUI();
         loadStaffDataByEmail();
-        setupListeners();
+        backButton.setOnClickListener(v -> finish());
+        saveButton.setOnClickListener(v -> updateStaff());
+        deleteButton.setOnClickListener(v -> deleteStaff());
     }
 
     private void initializeUI() {
         backButton = findViewById(R.id.backButton);
-        menuButton = findViewById(R.id.menu_button);
         firstNameInput = findViewById(R.id.firstNameInput);
         lastNameInput = findViewById(R.id.lastNameInput);
         emailInput = findViewById(R.id.emailInput);
         phoneInput = findViewById(R.id.phoneInput);
         birthDateInput = findViewById(R.id.birthDateInput);
-        confirmButton = findViewById(R.id.confirmButton);
+        saveButton = findViewById(R.id.saveButton);
+        deleteButton = findViewById(R.id.deleteButton);
         profileImage = findViewById(R.id.profileImage);
         editProfileIcon = findViewById(R.id.editProfileIcon);
 
@@ -95,11 +95,12 @@ public class EditStaffActivity extends AppCompatActivity {
         phoneInput.setTextColor(getResources().getColor(android.R.color.black));
         birthDateInput.setTextColor(getResources().getColor(android.R.color.black));
 
-        menuButton.setOnClickListener(this::showPopupMenu);
-
         // Set up profile picture functionality
         editProfileIcon.setOnClickListener(v -> showImagePickerDialog());
         birthDateInput.setOnClickListener(v -> showDatePicker());
+        emailInput.setFocusable(false);
+        emailInput.setClickable(false);
+        emailInput.setEnabled(false);
     }
 
     private void loadStaffDataByEmail() {
@@ -162,26 +163,6 @@ public class EditStaffActivity extends AppCompatActivity {
                 .into(profileImage);
     }
 
-    private void setupListeners() {
-        backButton.setOnClickListener(v -> finish());
-        confirmButton.setOnClickListener(v -> updateStaff());
-    }
-
-    private void showPopupMenu(View view) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
-        popupMenu.getMenu().add(0, 1, 0, "Delete Staff");
-
-        popupMenu.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == 1) {
-                deleteStaff();
-                return true;
-            }
-            return false;
-        });
-
-        popupMenu.show();
-    }
-
     private void updateStaff() {
         String firstName = firstNameInput.getText().toString().trim();
         String lastName = lastNameInput.getText().toString().trim();
@@ -189,7 +170,7 @@ public class EditStaffActivity extends AppCompatActivity {
         String phone = phoneInput.getText().toString().trim();
         String birthDate = birthDateInput.getText().toString().trim();
 
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty()) {
+        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || phone.isEmpty() || birthDate.isEmpty()) {
             Toast.makeText(this, "Please fill in required fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -222,8 +203,8 @@ public class EditStaffActivity extends AppCompatActivity {
         // Update Firestore first
         staffRef.update(updates)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Staff updated successfully", Toast.LENGTH_SHORT).show();
-                    finish();
+                        Toast.makeText(this, "Staff updated successfully", Toast.LENGTH_SHORT).show();
+                        finish();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(this, "Error updating staff: " + e.getMessage(), Toast.LENGTH_SHORT).show();

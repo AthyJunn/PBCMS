@@ -81,7 +81,7 @@
             </LinearLayout>
             <!--  Top Card with rounded corners  -->
             <FrameLayout
-                android:id="@+id/topCard"
+                android:id="@+id/doorStatusCard"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:clipToOutline="true"
@@ -143,11 +143,11 @@
                                 android:fontFamily="sans-serif-medium"
                                 android:text=""
                                 android:textColor="@android:color/white"
-                                android:textSize="40sp"/>
+                                android:textSize="36sp"/>
 
                             <ImageView
                                 android:id="@+id/infoIcon"
-                                android:layout_width="22dp"
+                                android:layout_width="20dp"
                                 android:layout_height="22dp"
                                 android:layout_marginStart="5dp"
                                 android:layout_marginTop="8dp"
