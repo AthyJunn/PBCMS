@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.*;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +30,21 @@ public class MainActivity extends AppCompatActivity {
                     .setApiKey("AIzaSyAuJjF7dME30MFvqMLxfgXZeG19rGnMFak")
                     .setDatabaseUrl("https://pbcms-c955a-default-rtdb.firebaseio.com")
                     .setProjectId("pbcms-c955a")
-                    .setStorageBucket("pbcms-c955a.firebasestorage.app") // Corrected
+                    .setStorageBucket("pbcms-c955a.firebasestorage.app")
                     .build();
 
             FirebaseApp.initializeApp(this, options);
         }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("alerts")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Log.d("FCM", "Subscribed to alerts topic");
+                    } else {
+                        Log.e("FCM", "Failed to subscribe to topic");
+                    }
+                });
+
 
         Button startButton = findViewById(R.id.getStartedButton);
         startButton.setOnClickListener(v -> {
