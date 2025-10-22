@@ -266,7 +266,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:src="@drawable/ic_baseline_search_24"
+            android:src="@drawable/ic_baseline_people_outline_24"
             android:scaleType="centerInside"
             android:padding="14dp"
             app:tint="#FFFFFF" />
