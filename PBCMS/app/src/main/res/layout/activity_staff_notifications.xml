@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#121212">
 
-    <!-- Scrollable Notification Content -->
+    <!--  Scrollable Notification Content  -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -16,177 +16,201 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <!-- Header -->
-        <TextView
-            android:id="@+id/tvHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Notifications"
-            android:layout_marginTop="40dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Temperature Notification -->
         <LinearLayout
-            android:orientation="horizontal"
-            android:padding="10dp"
+            android:orientation="vertical"
+            android:padding="16dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_thermostat_24"
-                app:tint="#FFB74D"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="2dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
+            <!--  Header  -->
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:text="Notifications"
+                android:layout_marginTop="40dp"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="12dp"/>
+
+            <!--  Temperature Notification  -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_thermostat_24"
+                    app:tint="#FFB74D"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="2dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Temperature Alert Triggered"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sensor Monitoring"
+                        android:textColor="#BBBBBB"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Room 1 temperature exceeded 32°C. Cooling system automatically activated to stabilize conditions."
+                        android:textColor="#AAAAAA"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#333333"/>
+
+            <!--  Humidity Notification  -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_baseline_water_drop_24"
+                    app:tint="#4FC3F7"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="2dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Humidity Level Warning"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sensor Monitoring"
+                        android:textColor="#BBBBBB"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Humidity level dropped below 25%. Humidifier has been activated automatically."
+                        android:textColor="#AAAAAA"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#333333"/>
+
+            <!--  Door Status Notification  -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_door_open_notification"
+                    app:tint="#FF7043"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="2dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Door Status Changed"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Access Log Update"
+                        android:textColor="#BBBBBB"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="The main entrance door was opened manually at 10:42 PM. Ensure authorized access only."
+                        android:textColor="#AAAAAA"
+                        android:textSize="13sp"
+                        android:layout_marginTop="4dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Empty State -->
+            <LinearLayout
+                android:id="@+id/emptyState"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_baseline_notifications_none_24"
+                    app:tint="#BCBCBC" />
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Temperature Alert Triggered"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:text="No notifications yet"
+                    android:textColor="#999999"
                     android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sensor Monitoring"
-                    android:textColor="#BBBBBB"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Room 1 temperature exceeded 32°C. Cooling system automatically activated to stabilize conditions."
-                    android:textColor="#AAAAAA"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
             </LinearLayout>
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#333333" />
-
-        <!-- Humidity Notification -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_water_drop_24"
-                app:tint="#4FC3F7"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="2dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity Level Warning"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sensor Monitoring"
-                    android:textColor="#BBBBBB"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity level dropped below 25%. Humidifier has been activated automatically."
-                    android:textColor="#AAAAAA"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#333333" />
-
-        <!-- Door Status Notification -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_door_open_notification"
-                app:tint="#FF7043"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="2dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Door Status Changed"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Access Log Update"
-                    android:textColor="#BBBBBB"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="The main entrance door was opened manually at 10:42 PM. Ensure authorized access only."
-                    android:textColor="#AAAAAA"
-                    android:textSize="13sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
 
     <!--  Bottom Navigation (fixed)  -->
     <LinearLayout
@@ -212,7 +236,7 @@
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_home_24"
             android:scaleType="centerInside"
-            android:padding="14dp" />
+            android:padding="14dp"/>
 
         <ImageButton
             android:id="@+id/historyButton"
@@ -223,18 +247,7 @@
             android:src="@drawable/ic_baseline_history_24"
             android:scaleType="centerInside"
             app:tint="#FFFFFF"
-            android:padding="14dp" />
-
-        <ImageButton
-            android:id="@+id/searchStaffButton"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:padding="14dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_baseline_search_24"
-            app:tint="#FFFFFF" />
+            android:padding="14dp"/>
 
         <ImageButton
             android:id="@+id/notificationsButton"
@@ -245,8 +258,7 @@
             android:src="@drawable/ic_baseline_notifications_none_24"
             android:scaleType="centerInside"
             app:tint="#FFFFFF"
-            android:padding="14dp" />
+            android:padding="14dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
